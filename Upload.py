@@ -1,6 +1,7 @@
 from os import listdir
 from os.path import isfile, join
 import boto3
+import fire
 
 class Upload:
 
@@ -8,10 +9,14 @@ class Upload:
         if bool(path) == True and bool(album) == True:
             try:
                 files = [f for f in listdir(path) if isfile(join(path, f))]
+                print(files)
                 expFiles = [files[i] for i in range(len(files)) if '.jpg' in files[i] or '.jpeg' in files[i]]
+                print(expFiles)
                 if len(expFiles) != 0:
                     for i in expFiles:
-                        self.s3_upload(i, album)
+                        print(i)
+                        self.s3_upload(path + '/' + i, album)
+
                 else:
                     return 'Нет файлов формата .jpg или .jpeg'
             except FileNotFoundError as e:
