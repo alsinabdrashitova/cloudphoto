@@ -16,7 +16,6 @@ class Upload:
                     for i in expFiles:
                         print(i)
                         self.s3_upload(path + '/' + i, album)
-
                 else:
                     return 'Нет файлов формата .jpg или .jpeg'
             except FileNotFoundError as e:
@@ -30,4 +29,4 @@ class Upload:
             service_name='s3',
             endpoint_url='https://storage.yandexcloud.net'
         )
-        s3.upload_file(file, 'd01.itiscl.ru', albName + '/' + str(file))
+        s3.upload_file(file, 'd01.itiscl.ru', albName + '/' + str(file.split('/')[-1]))
