@@ -44,8 +44,8 @@ def do_action(event, context):
 
 def get_faces(file_b64):
     url = 'https://vision.api.cloud.yandex.net/vision/v1/batchAnalyze'
-    header = {'Content-Type': 'application/json', 'Authorization': f'Api-Key AQVNx8w-dCyk96_86xRNZpMWuPn6s-M4EEvT0gVb'}
-    face_detect = {'folderId': 'b1gqlcslnerhqv6evl77',
+    header = {'Content-Type': 'application/json', 'Authorization': f'*'}
+    face_detect = {'folderId': '*',
                    'analyze_specs': [{'content': file_b64, 'features': [{'type': 'FACE_DETECTION'}]}]}
     response = requests.post(url, headers=header, data=json.dumps(face_detect))
     r_json = json.loads(response.text)
@@ -95,7 +95,7 @@ def get_message_queue():
 
 
 def send_mess(sqs, folder_path):
-    queue = sqs.get_queue_by_name(QueueName='test')
+    queue = sqs.get_queue_by_name(QueueName='*')
     queue.send_message(
         MessageBody=f'Object Id: {object_id}',
         MessageAttributes={
